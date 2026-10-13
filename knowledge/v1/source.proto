@@ -36,7 +36,7 @@ message Source {
   string download_uri = 3 [(google.api.field_behavior) = REQUIRED];
   string mime_type = 4 [(google.api.field_behavior) = REQUIRED];
 
-  google.protobuf.Timestamp create_time = 5 [(google.api.field_behavior) = REQUIRED];
+  google.protobuf.Timestamp create_time = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
   string created_by = 6 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {type: "identity.api.sdkim96.com/Account"}

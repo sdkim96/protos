@@ -28,7 +28,7 @@ message Member {
   ];
   MemberRole role = 3 [(google.api.field_behavior) = REQUIRED];
 
-  google.protobuf.Timestamp create_time = 4 [(google.api.field_behavior) = REQUIRED];
+  google.protobuf.Timestamp create_time = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
   string created_by = 5 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {type: "identity.api.sdkim96.com/Account"}

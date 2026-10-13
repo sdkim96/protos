@@ -40,10 +40,10 @@ message File {
   string display_name = 2;
   string description = 3;
 
-  string mime_type = 4;
+  string mime_type = 4 [(google.api.field_behavior) = REQUIRED];
   int64 size_bytes = 5;
 
-  google.protobuf.Timestamp create_time = 6 [(google.api.field_behavior) = REQUIRED];
+  google.protobuf.Timestamp create_time = 6 [(google.api.field_behavior) = OUTPUT_ONLY];
   string created_by = 7 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {type: "identity.api.sdkim96.com/Account"}
@@ -59,7 +59,7 @@ message File {
     (google.api.resource_reference) = {type: "identity.api.sdkim96.com/Account"}
   ];
 
-  FileState state = 12;
+  FileState state = 12 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 enum FileState {

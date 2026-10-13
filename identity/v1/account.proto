@@ -16,7 +16,7 @@ message Account {
   string display_name = 3 [(google.api.field_behavior) = REQUIRED];
   string password = 4 [(google.api.field_behavior) = REQUIRED];
 
-  google.protobuf.Timestamp create_time = 5 [(google.api.field_behavior) = REQUIRED];
+  google.protobuf.Timestamp create_time = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
   google.protobuf.Timestamp update_time = 6 [(google.api.field_behavior) = OPTIONAL];
   google.protobuf.Timestamp delete_time = 7 [(google.api.field_behavior) = OPTIONAL];
 }
