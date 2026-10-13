@@ -1,0 +1,51 @@
+name: buf
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: format / lint / breaking
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: bufbuild/buf-action@v1
+        with:
+          version: "1.72.0"
+          format: true
+          lint: true
+          breaking: ${{ github.event_name == 'pull_request' }}
+          breaking_against: ".git#branch=main"
+          push: false
+          archive: false
+          pr_comment: false
+
+  generate-drift:
+    name: generated code is up to date
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: bufbuild/buf-action@v1
+        with:
+          version: "1.72.0"
+          setup_only: true
+
+      - name: buf generate
+        run: buf generate
+
+      - name: fail if gen/ is stale
+        run: |
+          if ! git diff --exit-code -- gen/; then
+            echo "::error::gen/ is out of date. Run 'buf generate' and commit the result."
+            exit 1
+          fi
