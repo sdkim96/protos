@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package knowledge.v1;
+
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/protobuf/timestamp.proto";
+
+// Member represents the identity that joined to the given workspace.
+// Only the owner member has the authority to invite or remove other members from the workspace.
+// The owner member object should be co-created with the workspace object.
+message Member {
+  option (google.api.resource) = {
+    type: "knowledge.api.sdkim96.com/Member"
+    pattern: "workspaces/{workspace}/members/{member}"
+    singular: "member"
+    plural: "members"
+  };
+
+  // name represents the identifier for this member object.
+  // "workspaces/w1/members/rob"
+  string name = 1 [(google.api.field_behavior) = IDENTIFIER];
+  // account represents the string reference to the account resource.
+  // "accounts/rob"
+  string account = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "identity.api.sdkim96.com/Account"}
+  ];
+  MemberRole role = 3 [(google.api.field_behavior) = REQUIRED];
+
+  google.protobuf.Timestamp create_time = 4 [(google.api.field_behavior) = REQUIRED];
+  string created_by = 5 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "identity.api.sdkim96.com/Account"}
+  ];
+  google.protobuf.Timestamp delete_time = 6 [(google.api.field_behavior) = OPTIONAL];
+  string deleted_by = 7 [
+    (google.api.field_behavior) = OPTIONAL,
+    (google.api.resource_reference) = {type: "identity.api.sdkim96.com/Account"}
+  ];
+}
+
+enum MemberRole {
+  MEMBER_ROLE_UNSPECIFIED = 0;
+  MEMBER_ROLE_OWNER = 1;
+  MEMBER_ROLE_EDITOR = 2;
+  MEMBER_ROLE_VIEWER = 3;
+}
