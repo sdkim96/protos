@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package proto.knowledge.v1;
+
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/protobuf/timestamp.proto";
+
+// FileUrl represents the metadata and the operation state for copying data source to the knowledge service.
+// The url should be accessible by sending HTTP/GET requests, with the mime_type and optional headers.
+message FileUrl {
+  option (google.api.resource) = {
+    type: "knowledge.api.sdkim96.com/FileUrl"
+    pattern: "workspaces/{workspace}/fileUrls/{file_url}"
+  };
+  // name represents the identifier for this file. Represented like "workspaces/w1/fileUrls/fu1"
+  string name = 1 [(google.api.field_behavior) = IDENTIFIER];
+  string display_name = 2 [(google.api.field_behavior) = REQUIRED];
+  string description = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // url should be accessible by the system request.
+  string url = 4 [(google.api.field_behavior) = REQUIRED];
+  string mime_type = 5 [(google.api.field_behavior) = REQUIRED];
+  // the optional headers. It would be merged to the default headers.
+  map<string, string> headers = 6 [(google.api.field_behavior) = OPTIONAL];
+
+  google.protobuf.Timestamp create_time = 7 [(google.api.field_behavior) = OUTPUT_ONLY];
+  string created_by = 8 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "identity.api.sdkim96.com/Account"}
+  ];
+  FileUrlState state = 9 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+enum FileUrlState {
+  FILE_URL_STATE_UNSPECIFIED = 0;
+  FILE_URL_STATE_SUBMITTED = 1;
+  FILE_URL_STATE_PROCESSING = 2;
+  FILE_URL_STATE_SUCCESS = 3;
+  FILE_URL_STATE_ERROR = 4;
+}

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package proto.knowledge.v1;
+
+import "google/api/annotations.proto";
+import "proto/knowledge/v1/file.proto";
+
+service FileService {
+  rpc Create(FileServiceCreateRequest) returns (FileServiceCreateResponse) {
+    option (google.api.http) = {
+      post: "/v1/files"
+      body: "*"
+    };
+  }
+}

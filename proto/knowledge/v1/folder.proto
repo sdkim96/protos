@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package proto.knowledge.v1;
+
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/protobuf/timestamp.proto";
+
+// Folder represents a container that holds data sources
+message Folder {
+  option (google.api.resource) = {
+    type: "knowledge.api.sdkim96.com/Folder"
+    pattern: "workspaces/{workspace}/folders/{folder}"
+    singular: "folder"
+    plural: "folders"
+  };
+
+  // name is a fully qualified name of this object. It includes the workspace path at front of the name.
+  // for example, "workspaces/w1/folders/my-folder"
+  string name = 1 [(google.api.field_behavior) = IDENTIFIER];
+
+  // parent is the name of the parent folder.
+  // for example,
+  // ```
+  // name: "workspaces/w1/folders/my-folder"
+  // parent: "workspaces/w1/folders/my-parent-folder"
+  // ```
+  string parent = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  google.protobuf.Timestamp create_time = 6 [(google.api.field_behavior) = OUTPUT_ONLY];
+  string created_by = 7 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "identity.api.sdkim96.com/Account"}
+  ];
+  google.protobuf.Timestamp delete_time = 8 [(google.api.field_behavior) = OPTIONAL];
+  string deleted_by = 9 [
+    (google.api.field_behavior) = OPTIONAL,
+    (google.api.resource_reference) = {type: "identity.api.sdkim96.com/Account"}
+  ];
+}

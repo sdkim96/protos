@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+package proto.knowledge.v1;
+
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/protobuf/timestamp.proto";
+
+// File represents a metadata and operation state for the file-type data source, decided by the server.
+// Clients might observe logically same, but different file object based on its state.
+// If the File.state is success, Source[knowledge.api.sdkim96.com/Source] object must point to the file object.
+// Here is the example.
+// ```
+//  File{
+//      name: "workspaces/w1/files/f1",
+//      display_name: "seoul trip",
+//      description: "My trip to Seoul",
+//      mime_type: "application/pdf",
+//      size_bytes: 10240000,
+//      state: "success",
+//  }
+// Source {
+//     name: "workspaces/w1/sources/s1"
+//     ref: "workspaces/w1/files/f1"
+//     download_uri: "https://sdkim96.com/objects/obj1"
+//     mime_type: "application/pdf"
+//     create_time
+//     created_by
+//     delete_time
+//     deleted_by
+// }
+// ```
+message File {
+  option (google.api.resource) = {
+    type: "knowledge.api.sdkim96.com/File"
+    pattern: "workspaces/{workspace}/files/{file}"
+  };
+  // name represents the identifier for this object, represented like "workspaces/w1/files/f1"
+  string name = 1 [(google.api.field_behavior) = IDENTIFIER];
+  string display_name = 2;
+  string description = 3;
+
+  string mime_type = 4 [(google.api.field_behavior) = REQUIRED];
+  int64 size_bytes = 5;
+
+  google.protobuf.Timestamp create_time = 6 [(google.api.field_behavior) = OUTPUT_ONLY];
+  string created_by = 7 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "identity.api.sdkim96.com/Account"}
+  ];
+  google.protobuf.Timestamp update_time = 8 [(google.api.field_behavior) = OPTIONAL];
+  string updated_by = 9 [
+    (google.api.field_behavior) = OPTIONAL,
+    (google.api.resource_reference) = {type: "identity.api.sdkim96.com/Account"}
+  ];
+  google.protobuf.Timestamp delete_time = 10 [(google.api.field_behavior) = OPTIONAL];
+  string deleted_by = 11 [
+    (google.api.field_behavior) = OPTIONAL,
+    (google.api.resource_reference) = {type: "identity.api.sdkim96.com/Account"}
+  ];
+
+  FileState state = 12 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+message FileMeta {
+  string filename = 1 [(google.api.field_behavior) = REQUIRED];
+  string content_type = 2 [(google.api.field_behavior) = REQUIRED];
+  int64 size_bytes = 3 [(google.api.field_behavior) = OPTIONAL];
+}
+
+message FileServiceCreateRequest {
+  option (google.api.resource) = {type: "knowledge.api.sdkim96.com/FileServiceCreateRequest"};
+
+  oneof data {
+    FileMeta file_meta = 1;
+    bytes chunk = 2;
+  }
+  string display_name = 3 [(google.api.field_behavior) = REQUIRED];
+  string description = 4 [(google.api.field_behavior) = OPTIONAL];
+}
+
+message FileServiceCreateResponse {
+  File file = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+enum FileState {
+  FILE_STATE_UNSPECIFIED = 0;
+  FILE_STATE_UPLOADING = 1;
+  FILE_STATE_SUCCESS = 2;
+  FILE_STATE_ERROR = 3;
+}
