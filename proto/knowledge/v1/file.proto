@@ -37,50 +37,31 @@ message File {
   };
   // name represents the identifier for this object, represented like "workspaces/w1/files/f1"
   string name = 1 [(google.api.field_behavior) = IDENTIFIER];
-  string display_name = 2;
-  string description = 3;
+  string file_name = 2 [(google.api.field_behavior) = REQUIRED];
+  string display_name = 3 [(google.api.field_behavior) = OPTIONAL];
+  string description = 4 [(google.api.field_behavior) = OPTIONAL];
 
-  string mime_type = 4 [(google.api.field_behavior) = REQUIRED];
-  int64 size_bytes = 5;
+  string mime_type = 5 [(google.api.field_behavior) = REQUIRED];
+  int64 size_bytes = 6;
 
-  google.protobuf.Timestamp create_time = 6 [(google.api.field_behavior) = OUTPUT_ONLY];
-  string created_by = 7 [
+  bytes sha256_hash = 7 [(google.api.field_behavior) = OPTIONAL];
+  FileState state = 8 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  string created_by = 100 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {type: "identity.api.sdkim96.com/Account"}
   ];
-  google.protobuf.Timestamp update_time = 8 [(google.api.field_behavior) = OPTIONAL];
-  string updated_by = 9 [
+  string updated_by = 101 [
     (google.api.field_behavior) = OPTIONAL,
     (google.api.resource_reference) = {type: "identity.api.sdkim96.com/Account"}
   ];
-  google.protobuf.Timestamp delete_time = 10 [(google.api.field_behavior) = OPTIONAL];
-  string deleted_by = 11 [
+  string deleted_by = 102 [
     (google.api.field_behavior) = OPTIONAL,
     (google.api.resource_reference) = {type: "identity.api.sdkim96.com/Account"}
   ];
-
-  FileState state = 12 [(google.api.field_behavior) = OUTPUT_ONLY];
-}
-
-message FileMeta {
-  string filename = 1 [(google.api.field_behavior) = REQUIRED];
-  string content_type = 2 [(google.api.field_behavior) = REQUIRED];
-  int64 size_bytes = 3 [(google.api.field_behavior) = OPTIONAL];
-}
-
-message FileServiceCreateRequest {
-  option (google.api.resource) = {type: "knowledge.api.sdkim96.com/FileServiceCreateRequest"};
-
-  oneof data {
-    FileMeta file_meta = 1;
-    bytes chunk = 2;
-  }
-  string display_name = 3 [(google.api.field_behavior) = REQUIRED];
-  string description = 4 [(google.api.field_behavior) = OPTIONAL];
-}
-
-message FileServiceCreateResponse {
-  File file = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+  google.protobuf.Timestamp create_time = 200 [(google.api.field_behavior) = OUTPUT_ONLY];
+  google.protobuf.Timestamp update_time = 201 [(google.api.field_behavior) = OPTIONAL];
+  google.protobuf.Timestamp delete_time = 202 [(google.api.field_behavior) = OPTIONAL];
 }
 
 enum FileState {
