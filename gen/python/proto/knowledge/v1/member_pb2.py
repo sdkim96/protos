@@ -27,7 +27,7 @@ from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1fproto/knowledge/v1/member.proto\x12\x12proto.knowledge.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x95\x04\n\x06Member\x12\x17\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x08R\x04name\x12\x42\n\x07\x61\x63\x63ount\x18\x02 \x01(\tB(\xe0\x41\x02\xfa\x41\"\n identity.api.sdkim96.com/AccountR\x07\x61\x63\x63ount\x12\x37\n\x04role\x18\x03 \x01(\x0e\x32\x1e.proto.knowledge.v1.MemberRoleB\x03\xe0\x41\x02R\x04role\x12@\n\x0b\x63reate_time\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03R\ncreateTime\x12G\n\ncreated_by\x18\x05 \x01(\tB(\xe0\x41\x02\xfa\x41\"\n identity.api.sdkim96.com/AccountR\tcreatedBy\x12@\n\x0b\x64\x65lete_time\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x01R\ndeleteTime\x12G\n\ndeleted_by\x18\x07 \x01(\tB(\xe0\x41\x01\xfa\x41\"\n identity.api.sdkim96.com/AccountR\tdeletedBy:_\xea\x41\\\n knowledge.api.sdkim96.com/Member\x12\'workspaces/{workspace}/members/{member}*\x07members2\x06member*p\n\nMemberRole\x12\x1b\n\x17MEMBER_ROLE_UNSPECIFIED\x10\x00\x12\x15\n\x11MEMBER_ROLE_OWNER\x10\x01\x12\x16\n\x12MEMBER_ROLE_EDITOR\x10\x02\x12\x16\n\x12MEMBER_ROLE_VIEWER\x10\x03\x42\xd0\x01\n\x16\x63om.proto.knowledge.v1B\x0bMemberProtoP\x01Z?github.com/sdkim96/protos/gen/go/proto/knowledge/v1;knowledgev1\xa2\x02\x03PKX\xaa\x02\x12Proto.Knowledge.V1\xca\x02\x12Proto\\Knowledge\\V1\xe2\x02\x1eProto\\Knowledge\\V1\\GPBMetadata\xea\x02\x14Proto::Knowledge::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1fproto/knowledge/v1/member.proto\x12\x12proto.knowledge.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x97\x04\n\x06Member\x12\x17\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x08R\x04name\x12\x42\n\x07\x61\x63\x63ount\x18\x02 \x01(\tB(\xe0\x41\x02\xfa\x41\"\n identity.api.sdkim96.com/AccountR\x07\x61\x63\x63ount\x12\x37\n\x04role\x18\x03 \x01(\x0e\x32\x1e.proto.knowledge.v1.MemberRoleB\x03\xe0\x41\x02R\x04role\x12\x41\n\x0b\x63reate_time\x18\xc8\x01 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03R\ncreateTime\x12G\n\ncreated_by\x18\x64 \x01(\tB(\xe0\x41\x02\xfa\x41\"\n identity.api.sdkim96.com/AccountR\tcreatedBy\x12\x41\n\x0b\x64\x65lete_time\x18\xca\x01 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x01R\ndeleteTime\x12G\n\ndeleted_by\x18\x66 \x01(\tB(\xe0\x41\x01\xfa\x41\"\n identity.api.sdkim96.com/AccountR\tdeletedBy:_\xea\x41\\\n knowledge.api.sdkim96.com/Member\x12\'workspaces/{workspace}/members/{member}*\x07members2\x06member*p\n\nMemberRole\x12\x1b\n\x17MEMBER_ROLE_UNSPECIFIED\x10\x00\x12\x15\n\x11MEMBER_ROLE_OWNER\x10\x01\x12\x16\n\x12MEMBER_ROLE_EDITOR\x10\x02\x12\x16\n\x12MEMBER_ROLE_VIEWER\x10\x03\x42\xd0\x01\n\x16\x63om.proto.knowledge.v1B\x0bMemberProtoP\x01Z?github.com/sdkim96/protos/gen/go/proto/knowledge/v1;knowledgev1\xa2\x02\x03PKX\xaa\x02\x12Proto.Knowledge.V1\xca\x02\x12Proto\\Knowledge\\V1\xe2\x02\x1eProto\\Knowledge\\V1\\GPBMetadata\xea\x02\x14Proto::Knowledge::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -51,8 +51,8 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_MEMBER'].fields_by_name['deleted_by']._serialized_options = b'\340A\001\372A\"\n identity.api.sdkim96.com/Account'
   _globals['_MEMBER']._loaded_options = None
   _globals['_MEMBER']._serialized_options = b'\352A\\\n knowledge.api.sdkim96.com/Member\022\'workspaces/{workspace}/members/{member}*\007members2\006member'
-  _globals['_MEMBERROLE']._serialized_start=684
-  _globals['_MEMBERROLE']._serialized_end=796
+  _globals['_MEMBERROLE']._serialized_start=686
+  _globals['_MEMBERROLE']._serialized_end=798
   _globals['_MEMBER']._serialized_start=149
-  _globals['_MEMBER']._serialized_end=682
+  _globals['_MEMBER']._serialized_end=684
 # @@protoc_insertion_point(module_scope)

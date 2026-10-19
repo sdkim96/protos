@@ -106,17 +106,19 @@ type File struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// name represents the identifier for this object, represented like "workspaces/w1/files/f1"
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	DisplayName   string                 `protobuf:"bytes,2,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
-	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	MimeType      string                 `protobuf:"bytes,4,opt,name=mime_type,json=mimeType,proto3" json:"mime_type,omitempty"`
-	SizeBytes     int64                  `protobuf:"varint,5,opt,name=size_bytes,json=sizeBytes,proto3" json:"size_bytes,omitempty"`
-	CreateTime    *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
-	CreatedBy     string                 `protobuf:"bytes,7,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	UpdateTime    *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
-	UpdatedBy     string                 `protobuf:"bytes,9,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	DeleteTime    *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=delete_time,json=deleteTime,proto3" json:"delete_time,omitempty"`
-	DeletedBy     string                 `protobuf:"bytes,11,opt,name=deleted_by,json=deletedBy,proto3" json:"deleted_by,omitempty"`
-	State         FileState              `protobuf:"varint,12,opt,name=state,proto3,enum=proto.knowledge.v1.FileState" json:"state,omitempty"`
+	FileName      string                 `protobuf:"bytes,2,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
+	DisplayName   string                 `protobuf:"bytes,3,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	Description   string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	MimeType      string                 `protobuf:"bytes,5,opt,name=mime_type,json=mimeType,proto3" json:"mime_type,omitempty"`
+	SizeBytes     int64                  `protobuf:"varint,6,opt,name=size_bytes,json=sizeBytes,proto3" json:"size_bytes,omitempty"`
+	Sha256Hash    []byte                 `protobuf:"bytes,7,opt,name=sha256_hash,json=sha256Hash,proto3" json:"sha256_hash,omitempty"`
+	State         FileState              `protobuf:"varint,8,opt,name=state,proto3,enum=proto.knowledge.v1.FileState" json:"state,omitempty"`
+	CreatedBy     string                 `protobuf:"bytes,100,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	UpdatedBy     string                 `protobuf:"bytes,101,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	DeletedBy     string                 `protobuf:"bytes,102,opt,name=deleted_by,json=deletedBy,proto3" json:"deleted_by,omitempty"`
+	CreateTime    *timestamppb.Timestamp `protobuf:"bytes,200,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	UpdateTime    *timestamppb.Timestamp `protobuf:"bytes,201,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
+	DeleteTime    *timestamppb.Timestamp `protobuf:"bytes,202,opt,name=delete_time,json=deleteTime,proto3" json:"delete_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -158,6 +160,13 @@ func (x *File) GetName() string {
 	return ""
 }
 
+func (x *File) GetFileName() string {
+	if x != nil {
+		return x.FileName
+	}
+	return ""
+}
+
 func (x *File) GetDisplayName() string {
 	if x != nil {
 		return x.DisplayName
@@ -186,46 +195,11 @@ func (x *File) GetSizeBytes() int64 {
 	return 0
 }
 
-func (x *File) GetCreateTime() *timestamppb.Timestamp {
+func (x *File) GetSha256Hash() []byte {
 	if x != nil {
-		return x.CreateTime
+		return x.Sha256Hash
 	}
 	return nil
-}
-
-func (x *File) GetCreatedBy() string {
-	if x != nil {
-		return x.CreatedBy
-	}
-	return ""
-}
-
-func (x *File) GetUpdateTime() *timestamppb.Timestamp {
-	if x != nil {
-		return x.UpdateTime
-	}
-	return nil
-}
-
-func (x *File) GetUpdatedBy() string {
-	if x != nil {
-		return x.UpdatedBy
-	}
-	return ""
-}
-
-func (x *File) GetDeleteTime() *timestamppb.Timestamp {
-	if x != nil {
-		return x.DeleteTime
-	}
-	return nil
-}
-
-func (x *File) GetDeletedBy() string {
-	if x != nil {
-		return x.DeletedBy
-	}
-	return ""
 }
 
 func (x *File) GetState() FileState {
@@ -235,204 +209,44 @@ func (x *File) GetState() FileState {
 	return FileState_FILE_STATE_UNSPECIFIED
 }
 
-type FileMeta struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Filename      string                 `protobuf:"bytes,1,opt,name=filename,proto3" json:"filename,omitempty"`
-	ContentType   string                 `protobuf:"bytes,2,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
-	SizeBytes     int64                  `protobuf:"varint,3,opt,name=size_bytes,json=sizeBytes,proto3" json:"size_bytes,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *FileMeta) Reset() {
-	*x = FileMeta{}
-	mi := &file_proto_knowledge_v1_file_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *FileMeta) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*FileMeta) ProtoMessage() {}
-
-func (x *FileMeta) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_knowledge_v1_file_proto_msgTypes[1]
+func (x *File) GetCreatedBy() string {
 	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use FileMeta.ProtoReflect.Descriptor instead.
-func (*FileMeta) Descriptor() ([]byte, []int) {
-	return file_proto_knowledge_v1_file_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *FileMeta) GetFilename() string {
-	if x != nil {
-		return x.Filename
+		return x.CreatedBy
 	}
 	return ""
 }
 
-func (x *FileMeta) GetContentType() string {
+func (x *File) GetUpdatedBy() string {
 	if x != nil {
-		return x.ContentType
+		return x.UpdatedBy
 	}
 	return ""
 }
 
-func (x *FileMeta) GetSizeBytes() int64 {
+func (x *File) GetDeletedBy() string {
 	if x != nil {
-		return x.SizeBytes
+		return x.DeletedBy
 	}
-	return 0
+	return ""
 }
 
-type FileServiceCreateRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to Data:
-	//
-	//	*FileServiceCreateRequest_FileMeta
-	//	*FileServiceCreateRequest_Chunk
-	Data          isFileServiceCreateRequest_Data `protobuf_oneof:"data"`
-	DisplayName   string                          `protobuf:"bytes,3,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
-	Description   string                          `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *FileServiceCreateRequest) Reset() {
-	*x = FileServiceCreateRequest{}
-	mi := &file_proto_knowledge_v1_file_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *FileServiceCreateRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*FileServiceCreateRequest) ProtoMessage() {}
-
-func (x *FileServiceCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_knowledge_v1_file_proto_msgTypes[2]
+func (x *File) GetCreateTime() *timestamppb.Timestamp {
 	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use FileServiceCreateRequest.ProtoReflect.Descriptor instead.
-func (*FileServiceCreateRequest) Descriptor() ([]byte, []int) {
-	return file_proto_knowledge_v1_file_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *FileServiceCreateRequest) GetData() isFileServiceCreateRequest_Data {
-	if x != nil {
-		return x.Data
+		return x.CreateTime
 	}
 	return nil
 }
 
-func (x *FileServiceCreateRequest) GetFileMeta() *FileMeta {
+func (x *File) GetUpdateTime() *timestamppb.Timestamp {
 	if x != nil {
-		if x, ok := x.Data.(*FileServiceCreateRequest_FileMeta); ok {
-			return x.FileMeta
-		}
+		return x.UpdateTime
 	}
 	return nil
 }
 
-func (x *FileServiceCreateRequest) GetChunk() []byte {
+func (x *File) GetDeleteTime() *timestamppb.Timestamp {
 	if x != nil {
-		if x, ok := x.Data.(*FileServiceCreateRequest_Chunk); ok {
-			return x.Chunk
-		}
-	}
-	return nil
-}
-
-func (x *FileServiceCreateRequest) GetDisplayName() string {
-	if x != nil {
-		return x.DisplayName
-	}
-	return ""
-}
-
-func (x *FileServiceCreateRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
-}
-
-type isFileServiceCreateRequest_Data interface {
-	isFileServiceCreateRequest_Data()
-}
-
-type FileServiceCreateRequest_FileMeta struct {
-	FileMeta *FileMeta `protobuf:"bytes,1,opt,name=file_meta,json=fileMeta,proto3,oneof"`
-}
-
-type FileServiceCreateRequest_Chunk struct {
-	Chunk []byte `protobuf:"bytes,2,opt,name=chunk,proto3,oneof"`
-}
-
-func (*FileServiceCreateRequest_FileMeta) isFileServiceCreateRequest_Data() {}
-
-func (*FileServiceCreateRequest_Chunk) isFileServiceCreateRequest_Data() {}
-
-type FileServiceCreateResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	File          *File                  `protobuf:"bytes,1,opt,name=file,proto3" json:"file,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *FileServiceCreateResponse) Reset() {
-	*x = FileServiceCreateResponse{}
-	mi := &file_proto_knowledge_v1_file_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *FileServiceCreateResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*FileServiceCreateResponse) ProtoMessage() {}
-
-func (x *FileServiceCreateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_knowledge_v1_file_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use FileServiceCreateResponse.ProtoReflect.Descriptor instead.
-func (*FileServiceCreateResponse) Descriptor() ([]byte, []int) {
-	return file_proto_knowledge_v1_file_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *FileServiceCreateResponse) GetFile() *File {
-	if x != nil {
-		return x.File
+		return x.DeleteTime
 	}
 	return nil
 }
@@ -441,46 +255,34 @@ var File_proto_knowledge_v1_file_proto protoreflect.FileDescriptor
 
 const file_proto_knowledge_v1_file_proto_rawDesc = "" +
 	"\n" +
-	"\x1dproto/knowledge/v1/file.proto\x12\x12proto.knowledge.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xca\x05\n" +
+	"\x1dproto/knowledge/v1/file.proto\x12\x12proto.knowledge.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x9f\x06\n" +
 	"\x04File\x12\x17\n" +
-	"\x04name\x18\x01 \x01(\tB\x03\xe0A\bR\x04name\x12!\n" +
-	"\fdisplay_name\x18\x02 \x01(\tR\vdisplayName\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription\x12 \n" +
-	"\tmime_type\x18\x04 \x01(\tB\x03\xe0A\x02R\bmimeType\x12\x1d\n" +
+	"\x04name\x18\x01 \x01(\tB\x03\xe0A\bR\x04name\x12 \n" +
+	"\tfile_name\x18\x02 \x01(\tB\x03\xe0A\x02R\bfileName\x12&\n" +
+	"\fdisplay_name\x18\x03 \x01(\tB\x03\xe0A\x01R\vdisplayName\x12%\n" +
+	"\vdescription\x18\x04 \x01(\tB\x03\xe0A\x01R\vdescription\x12 \n" +
+	"\tmime_type\x18\x05 \x01(\tB\x03\xe0A\x02R\bmimeType\x12\x1d\n" +
 	"\n" +
-	"size_bytes\x18\x05 \x01(\x03R\tsizeBytes\x12@\n" +
-	"\vcreate_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\n" +
-	"createTime\x12G\n" +
+	"size_bytes\x18\x06 \x01(\x03R\tsizeBytes\x12$\n" +
+	"\vsha256_hash\x18\a \x01(\fB\x03\xe0A\x01R\n" +
+	"sha256Hash\x128\n" +
+	"\x05state\x18\b \x01(\x0e2\x1d.proto.knowledge.v1.FileStateB\x03\xe0A\x03R\x05state\x12G\n" +
 	"\n" +
-	"created_by\x18\a \x01(\tB(\xe0A\x02\xfaA\"\n" +
-	" identity.api.sdkim96.com/AccountR\tcreatedBy\x12@\n" +
-	"\vupdate_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x01R\n" +
-	"updateTime\x12G\n" +
+	"created_by\x18d \x01(\tB(\xe0A\x02\xfaA\"\n" +
+	" identity.api.sdkim96.com/AccountR\tcreatedBy\x12G\n" +
 	"\n" +
-	"updated_by\x18\t \x01(\tB(\xe0A\x01\xfaA\"\n" +
-	" identity.api.sdkim96.com/AccountR\tupdatedBy\x12@\n" +
-	"\vdelete_time\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x01R\n" +
-	"deleteTime\x12G\n" +
+	"updated_by\x18e \x01(\tB(\xe0A\x01\xfaA\"\n" +
+	" identity.api.sdkim96.com/AccountR\tupdatedBy\x12G\n" +
 	"\n" +
-	"deleted_by\x18\v \x01(\tB(\xe0A\x01\xfaA\"\n" +
-	" identity.api.sdkim96.com/AccountR\tdeletedBy\x128\n" +
-	"\x05state\x18\f \x01(\x0e2\x1d.proto.knowledge.v1.FileStateB\x03\xe0A\x03R\x05state:H\xeaAE\n" +
-	"\x1eknowledge.api.sdkim96.com/File\x12#workspaces/{workspace}/files/{file}\"w\n" +
-	"\bFileMeta\x12\x1f\n" +
-	"\bfilename\x18\x01 \x01(\tB\x03\xe0A\x02R\bfilename\x12&\n" +
-	"\fcontent_type\x18\x02 \x01(\tB\x03\xe0A\x02R\vcontentType\x12\"\n" +
-	"\n" +
-	"size_bytes\x18\x03 \x01(\x03B\x03\xe0A\x01R\tsizeBytes\"\xff\x01\n" +
-	"\x18FileServiceCreateRequest\x12;\n" +
-	"\tfile_meta\x18\x01 \x01(\v2\x1c.proto.knowledge.v1.FileMetaH\x00R\bfileMeta\x12\x16\n" +
-	"\x05chunk\x18\x02 \x01(\fH\x00R\x05chunk\x12&\n" +
-	"\fdisplay_name\x18\x03 \x01(\tB\x03\xe0A\x02R\vdisplayName\x12%\n" +
-	"\vdescription\x18\x04 \x01(\tB\x03\xe0A\x01R\vdescription:7\xeaA4\n" +
-	"2knowledge.api.sdkim96.com/FileServiceCreateRequestB\x06\n" +
-	"\x04data\"N\n" +
-	"\x19FileServiceCreateResponse\x121\n" +
-	"\x04file\x18\x01 \x01(\v2\x18.proto.knowledge.v1.FileB\x03\xe0A\x03R\x04file*o\n" +
+	"deleted_by\x18f \x01(\tB(\xe0A\x01\xfaA\"\n" +
+	" identity.api.sdkim96.com/AccountR\tdeletedBy\x12A\n" +
+	"\vcreate_time\x18\xc8\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\n" +
+	"createTime\x12A\n" +
+	"\vupdate_time\x18\xc9\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x01R\n" +
+	"updateTime\x12A\n" +
+	"\vdelete_time\x18\xca\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x01R\n" +
+	"deleteTime:H\xeaAE\n" +
+	"\x1eknowledge.api.sdkim96.com/File\x12#workspaces/{workspace}/files/{file}*o\n" +
 	"\tFileState\x12\x1a\n" +
 	"\x16FILE_STATE_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14FILE_STATE_UPLOADING\x10\x01\x12\x16\n" +
@@ -501,27 +303,22 @@ func file_proto_knowledge_v1_file_proto_rawDescGZIP() []byte {
 }
 
 var file_proto_knowledge_v1_file_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_proto_knowledge_v1_file_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_proto_knowledge_v1_file_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_proto_knowledge_v1_file_proto_goTypes = []any{
-	(FileState)(0),                    // 0: proto.knowledge.v1.FileState
-	(*File)(nil),                      // 1: proto.knowledge.v1.File
-	(*FileMeta)(nil),                  // 2: proto.knowledge.v1.FileMeta
-	(*FileServiceCreateRequest)(nil),  // 3: proto.knowledge.v1.FileServiceCreateRequest
-	(*FileServiceCreateResponse)(nil), // 4: proto.knowledge.v1.FileServiceCreateResponse
-	(*timestamppb.Timestamp)(nil),     // 5: google.protobuf.Timestamp
+	(FileState)(0),                // 0: proto.knowledge.v1.FileState
+	(*File)(nil),                  // 1: proto.knowledge.v1.File
+	(*timestamppb.Timestamp)(nil), // 2: google.protobuf.Timestamp
 }
 var file_proto_knowledge_v1_file_proto_depIdxs = []int32{
-	5, // 0: proto.knowledge.v1.File.create_time:type_name -> google.protobuf.Timestamp
-	5, // 1: proto.knowledge.v1.File.update_time:type_name -> google.protobuf.Timestamp
-	5, // 2: proto.knowledge.v1.File.delete_time:type_name -> google.protobuf.Timestamp
-	0, // 3: proto.knowledge.v1.File.state:type_name -> proto.knowledge.v1.FileState
-	2, // 4: proto.knowledge.v1.FileServiceCreateRequest.file_meta:type_name -> proto.knowledge.v1.FileMeta
-	1, // 5: proto.knowledge.v1.FileServiceCreateResponse.file:type_name -> proto.knowledge.v1.File
-	6, // [6:6] is the sub-list for method output_type
-	6, // [6:6] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	0, // 0: proto.knowledge.v1.File.state:type_name -> proto.knowledge.v1.FileState
+	2, // 1: proto.knowledge.v1.File.create_time:type_name -> google.protobuf.Timestamp
+	2, // 2: proto.knowledge.v1.File.update_time:type_name -> google.protobuf.Timestamp
+	2, // 3: proto.knowledge.v1.File.delete_time:type_name -> google.protobuf.Timestamp
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_proto_knowledge_v1_file_proto_init() }
@@ -529,17 +326,13 @@ func file_proto_knowledge_v1_file_proto_init() {
 	if File_proto_knowledge_v1_file_proto != nil {
 		return
 	}
-	file_proto_knowledge_v1_file_proto_msgTypes[2].OneofWrappers = []any{
-		(*FileServiceCreateRequest_FileMeta)(nil),
-		(*FileServiceCreateRequest_Chunk)(nil),
-	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_knowledge_v1_file_proto_rawDesc), len(file_proto_knowledge_v1_file_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   4,
+			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

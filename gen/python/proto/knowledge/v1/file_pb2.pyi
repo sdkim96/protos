@@ -23,57 +23,33 @@ FILE_STATE_SUCCESS: FileState
 FILE_STATE_ERROR: FileState
 
 class File(_message.Message):
-    __slots__ = ("name", "display_name", "description", "mime_type", "size_bytes", "create_time", "created_by", "update_time", "updated_by", "delete_time", "deleted_by", "state")
+    __slots__ = ("name", "file_name", "display_name", "description", "mime_type", "size_bytes", "sha256_hash", "state", "created_by", "updated_by", "deleted_by", "create_time", "update_time", "delete_time")
     NAME_FIELD_NUMBER: _ClassVar[int]
+    FILE_NAME_FIELD_NUMBER: _ClassVar[int]
     DISPLAY_NAME_FIELD_NUMBER: _ClassVar[int]
     DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
     MIME_TYPE_FIELD_NUMBER: _ClassVar[int]
     SIZE_BYTES_FIELD_NUMBER: _ClassVar[int]
-    CREATE_TIME_FIELD_NUMBER: _ClassVar[int]
-    CREATED_BY_FIELD_NUMBER: _ClassVar[int]
-    UPDATE_TIME_FIELD_NUMBER: _ClassVar[int]
-    UPDATED_BY_FIELD_NUMBER: _ClassVar[int]
-    DELETE_TIME_FIELD_NUMBER: _ClassVar[int]
-    DELETED_BY_FIELD_NUMBER: _ClassVar[int]
+    SHA256_HASH_FIELD_NUMBER: _ClassVar[int]
     STATE_FIELD_NUMBER: _ClassVar[int]
+    CREATED_BY_FIELD_NUMBER: _ClassVar[int]
+    UPDATED_BY_FIELD_NUMBER: _ClassVar[int]
+    DELETED_BY_FIELD_NUMBER: _ClassVar[int]
+    CREATE_TIME_FIELD_NUMBER: _ClassVar[int]
+    UPDATE_TIME_FIELD_NUMBER: _ClassVar[int]
+    DELETE_TIME_FIELD_NUMBER: _ClassVar[int]
     name: str
+    file_name: str
     display_name: str
     description: str
     mime_type: str
     size_bytes: int
-    create_time: _timestamp_pb2.Timestamp
-    created_by: str
-    update_time: _timestamp_pb2.Timestamp
-    updated_by: str
-    delete_time: _timestamp_pb2.Timestamp
-    deleted_by: str
+    sha256_hash: bytes
     state: FileState
-    def __init__(self, name: _Optional[str] = ..., display_name: _Optional[str] = ..., description: _Optional[str] = ..., mime_type: _Optional[str] = ..., size_bytes: _Optional[int] = ..., create_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., created_by: _Optional[str] = ..., update_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., updated_by: _Optional[str] = ..., delete_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., deleted_by: _Optional[str] = ..., state: _Optional[_Union[FileState, str]] = ...) -> None: ...
-
-class FileMeta(_message.Message):
-    __slots__ = ("filename", "content_type", "size_bytes")
-    FILENAME_FIELD_NUMBER: _ClassVar[int]
-    CONTENT_TYPE_FIELD_NUMBER: _ClassVar[int]
-    SIZE_BYTES_FIELD_NUMBER: _ClassVar[int]
-    filename: str
-    content_type: str
-    size_bytes: int
-    def __init__(self, filename: _Optional[str] = ..., content_type: _Optional[str] = ..., size_bytes: _Optional[int] = ...) -> None: ...
-
-class FileServiceCreateRequest(_message.Message):
-    __slots__ = ("file_meta", "chunk", "display_name", "description")
-    FILE_META_FIELD_NUMBER: _ClassVar[int]
-    CHUNK_FIELD_NUMBER: _ClassVar[int]
-    DISPLAY_NAME_FIELD_NUMBER: _ClassVar[int]
-    DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
-    file_meta: FileMeta
-    chunk: bytes
-    display_name: str
-    description: str
-    def __init__(self, file_meta: _Optional[_Union[FileMeta, _Mapping]] = ..., chunk: _Optional[bytes] = ..., display_name: _Optional[str] = ..., description: _Optional[str] = ...) -> None: ...
-
-class FileServiceCreateResponse(_message.Message):
-    __slots__ = ("file",)
-    FILE_FIELD_NUMBER: _ClassVar[int]
-    file: File
-    def __init__(self, file: _Optional[_Union[File, _Mapping]] = ...) -> None: ...
+    created_by: str
+    updated_by: str
+    deleted_by: str
+    create_time: _timestamp_pb2.Timestamp
+    update_time: _timestamp_pb2.Timestamp
+    delete_time: _timestamp_pb2.Timestamp
+    def __init__(self, name: _Optional[str] = ..., file_name: _Optional[str] = ..., display_name: _Optional[str] = ..., description: _Optional[str] = ..., mime_type: _Optional[str] = ..., size_bytes: _Optional[int] = ..., sha256_hash: _Optional[bytes] = ..., state: _Optional[_Union[FileState, str]] = ..., created_by: _Optional[str] = ..., updated_by: _Optional[str] = ..., deleted_by: _Optional[str] = ..., create_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., update_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., delete_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...

@@ -34,10 +34,10 @@ type Workspace struct {
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	DisplayName   string                 `protobuf:"bytes,2,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
 	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	CreateTime    *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
-	CreatedBy     string                 `protobuf:"bytes,5,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	DeleteTime    *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=delete_time,json=deleteTime,proto3" json:"delete_time,omitempty"`
-	DeletedBy     string                 `protobuf:"bytes,7,opt,name=deleted_by,json=deletedBy,proto3" json:"deleted_by,omitempty"`
+	CreateTime    *timestamppb.Timestamp `protobuf:"bytes,200,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	CreatedBy     string                 `protobuf:"bytes,100,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	DeleteTime    *timestamppb.Timestamp `protobuf:"bytes,202,opt,name=delete_time,json=deleteTime,proto3" json:"delete_time,omitempty"`
+	DeletedBy     string                 `protobuf:"bytes,102,opt,name=deleted_by,json=deletedBy,proto3" json:"deleted_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -125,20 +125,20 @@ var File_proto_knowledge_v1_workspace_proto protoreflect.FileDescriptor
 
 const file_proto_knowledge_v1_workspace_proto_rawDesc = "" +
 	"\n" +
-	"\"proto/knowledge/v1/workspace.proto\x12\x12proto.knowledge.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xe2\x03\n" +
+	"\"proto/knowledge/v1/workspace.proto\x12\x12proto.knowledge.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xe4\x03\n" +
 	"\tWorkspace\x12\x17\n" +
 	"\x04name\x18\x01 \x01(\tB\x03\xe0A\bR\x04name\x12&\n" +
 	"\fdisplay_name\x18\x02 \x01(\tB\x03\xe0A\x02R\vdisplayName\x12%\n" +
-	"\vdescription\x18\x03 \x01(\tB\x03\xe0A\x01R\vdescription\x12@\n" +
-	"\vcreate_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\n" +
+	"\vdescription\x18\x03 \x01(\tB\x03\xe0A\x01R\vdescription\x12A\n" +
+	"\vcreate_time\x18\xc8\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\n" +
 	"createTime\x12G\n" +
 	"\n" +
-	"created_by\x18\x05 \x01(\tB(\xe0A\x02\xfaA\"\n" +
-	" identity.api.sdkim96.com/AccountR\tcreatedBy\x12@\n" +
-	"\vdelete_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x01R\n" +
+	"created_by\x18d \x01(\tB(\xe0A\x02\xfaA\"\n" +
+	" identity.api.sdkim96.com/AccountR\tcreatedBy\x12A\n" +
+	"\vdelete_time\x18\xca\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x01R\n" +
 	"deleteTime\x12G\n" +
 	"\n" +
-	"deleted_by\x18\a \x01(\tB(\xe0A\x01\xfaA\"\n" +
+	"deleted_by\x18f \x01(\tB(\xe0A\x01\xfaA\"\n" +
 	" identity.api.sdkim96.com/AccountR\tdeletedBy:W\xeaAT\n" +
 	"#knowledge.api.sdkim96.com/Workspace\x12\x16workspaces/{workspace}*\n" +
 	"workspaces2\tworkspaceB\xd3\x01\n" +

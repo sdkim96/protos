@@ -27,7 +27,7 @@ from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n proto/knowledge/v1/fileurl.proto\x12\x12proto.knowledge.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xcb\x04\n\x07\x46ileUrl\x12\x17\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x08R\x04name\x12&\n\x0c\x64isplay_name\x18\x02 \x01(\tB\x03\xe0\x41\x02R\x0b\x64isplayName\x12%\n\x0b\x64\x65scription\x18\x03 \x01(\tB\x03\xe0\x41\x01R\x0b\x64\x65scription\x12\x15\n\x03url\x18\x04 \x01(\tB\x03\xe0\x41\x02R\x03url\x12 \n\tmime_type\x18\x05 \x01(\tB\x03\xe0\x41\x02R\x08mimeType\x12G\n\x07headers\x18\x06 \x03(\x0b\x32(.proto.knowledge.v1.FileUrl.HeadersEntryB\x03\xe0\x41\x01R\x07headers\x12@\n\x0b\x63reate_time\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03R\ncreateTime\x12G\n\ncreated_by\x18\x08 \x01(\tB(\xe0\x41\x02\xfa\x41\"\n identity.api.sdkim96.com/AccountR\tcreatedBy\x12;\n\x05state\x18\t \x01(\x0e\x32 .proto.knowledge.v1.FileUrlStateB\x03\xe0\x41\x03R\x05state\x1a:\n\x0cHeadersEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n\x05value\x18\x02 \x01(\tR\x05value:\x02\x38\x01:R\xea\x41O\n!knowledge.api.sdkim96.com/FileUrl\x12*workspaces/{workspace}/fileUrls/{file_url}*\xa1\x01\n\x0c\x46ileUrlState\x12\x1e\n\x1a\x46ILE_URL_STATE_UNSPECIFIED\x10\x00\x12\x1c\n\x18\x46ILE_URL_STATE_SUBMITTED\x10\x01\x12\x1d\n\x19\x46ILE_URL_STATE_PROCESSING\x10\x02\x12\x1a\n\x16\x46ILE_URL_STATE_SUCCESS\x10\x03\x12\x18\n\x14\x46ILE_URL_STATE_ERROR\x10\x04\x42\xd1\x01\n\x16\x63om.proto.knowledge.v1B\x0c\x46ileurlProtoP\x01Z?github.com/sdkim96/protos/gen/go/proto/knowledge/v1;knowledgev1\xa2\x02\x03PKX\xaa\x02\x12Proto.Knowledge.V1\xca\x02\x12Proto\\Knowledge\\V1\xe2\x02\x1eProto\\Knowledge\\V1\\GPBMetadata\xea\x02\x14Proto::Knowledge::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n proto/knowledge/v1/fileurl.proto\x12\x12proto.knowledge.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xcc\x04\n\x07\x46ileUrl\x12\x17\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x08R\x04name\x12&\n\x0c\x64isplay_name\x18\x02 \x01(\tB\x03\xe0\x41\x02R\x0b\x64isplayName\x12%\n\x0b\x64\x65scription\x18\x03 \x01(\tB\x03\xe0\x41\x01R\x0b\x64\x65scription\x12\x15\n\x03url\x18\x04 \x01(\tB\x03\xe0\x41\x02R\x03url\x12 \n\tmime_type\x18\x05 \x01(\tB\x03\xe0\x41\x02R\x08mimeType\x12G\n\x07headers\x18\x06 \x03(\x0b\x32(.proto.knowledge.v1.FileUrl.HeadersEntryB\x03\xe0\x41\x01R\x07headers\x12\x41\n\x0b\x63reate_time\x18\xc8\x01 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03R\ncreateTime\x12G\n\ncreated_by\x18\x64 \x01(\tB(\xe0\x41\x02\xfa\x41\"\n identity.api.sdkim96.com/AccountR\tcreatedBy\x12;\n\x05state\x18\t \x01(\x0e\x32 .proto.knowledge.v1.FileUrlStateB\x03\xe0\x41\x03R\x05state\x1a:\n\x0cHeadersEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n\x05value\x18\x02 \x01(\tR\x05value:\x02\x38\x01:R\xea\x41O\n!knowledge.api.sdkim96.com/FileUrl\x12*workspaces/{workspace}/fileUrls/{file_url}*\xa1\x01\n\x0c\x46ileUrlState\x12\x1e\n\x1a\x46ILE_URL_STATE_UNSPECIFIED\x10\x00\x12\x1c\n\x18\x46ILE_URL_STATE_SUBMITTED\x10\x01\x12\x1d\n\x19\x46ILE_URL_STATE_PROCESSING\x10\x02\x12\x1a\n\x16\x46ILE_URL_STATE_SUCCESS\x10\x03\x12\x18\n\x14\x46ILE_URL_STATE_ERROR\x10\x04\x42\xd1\x01\n\x16\x63om.proto.knowledge.v1B\x0c\x46ileurlProtoP\x01Z?github.com/sdkim96/protos/gen/go/proto/knowledge/v1;knowledgev1\xa2\x02\x03PKX\xaa\x02\x12Proto.Knowledge.V1\xca\x02\x12Proto\\Knowledge\\V1\xe2\x02\x1eProto\\Knowledge\\V1\\GPBMetadata\xea\x02\x14Proto::Knowledge::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -57,10 +57,10 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_FILEURL'].fields_by_name['state']._serialized_options = b'\340A\003'
   _globals['_FILEURL']._loaded_options = None
   _globals['_FILEURL']._serialized_options = b'\352AO\n!knowledge.api.sdkim96.com/FileUrl\022*workspaces/{workspace}/fileUrls/{file_url}'
-  _globals['_FILEURLSTATE']._serialized_start=740
-  _globals['_FILEURLSTATE']._serialized_end=901
+  _globals['_FILEURLSTATE']._serialized_start=741
+  _globals['_FILEURLSTATE']._serialized_end=902
   _globals['_FILEURL']._serialized_start=150
-  _globals['_FILEURL']._serialized_end=737
-  _globals['_FILEURL_HEADERSENTRY']._serialized_start=595
-  _globals['_FILEURL_HEADERSENTRY']._serialized_end=653
+  _globals['_FILEURL']._serialized_end=738
+  _globals['_FILEURL_HEADERSENTRY']._serialized_start=596
+  _globals['_FILEURL_HEADERSENTRY']._serialized_end=654
 # @@protoc_insertion_point(module_scope)
