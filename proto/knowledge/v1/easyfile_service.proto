@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package proto.knowledge.v1;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "proto/knowledge/v1/file.proto";
+
+// EasyUploadRequest creates a File and delivers its content in a single JSON request.
+// The whole request must not exceed 32 MB.
+message EasyUploadRequest {
+  // parent is the workspace that owns the file.
+  // For example, "workspaces/w1"
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "knowledge.api.sdkim96.com/Workspace"}
+  ];
+  // file_name represents the original name of the file.
+  string file_name = 2 [(google.api.field_behavior) = REQUIRED];
+  // display_name is the user-friendly name of the file.
+  string display_name = 3 [(google.api.field_behavior) = OPTIONAL];
+  // description provides additional information about the file.
+  string description = 4 [(google.api.field_behavior) = OPTIONAL];
+  // mime_type is the media type of content.
+  // For example, "application/pdf"
+  string mime_type = 5 [(google.api.field_behavior) = REQUIRED];
+  // content is the raw file content. In JSON, it is a standard base64 string without a data URL prefix.
+  bytes content = 6 [(google.api.field_behavior) = REQUIRED];
+}
+
+// EasyFileService delivers file bytes by using json request.
+// Json Request carries the file content encoded in base64.
+service EasyFileService {
+  // EasyUpload creates a File from the request and returns it.
+  // The returned File may still be processing. Clients poll FileService.GetFile until
+  // File.state is FILE_STATE_SUCCESS, then find its Source by Source.ref == File.name.
+  //
+  // Errors:
+  //  - 400 Bad Request: a required field is missing, or content is not valid base64.
+  //  - 413 Content Too Large: the request exceeds 32 MB.
+  //  - 415 Unsupported Media Type: mime_type is not supported.
+  rpc EasyUpload(EasyUploadRequest) returns (File) {
+    option (google.api.http) = {
+      post: "/v1/{parent=workspaces/*}/files:easyUpload"
+      body: "*"
+    };
+  }
+}

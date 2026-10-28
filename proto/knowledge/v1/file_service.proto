@@ -4,75 +4,23 @@ package proto.knowledge.v1;
 
 import "google/api/annotations.proto";
 import "google/api/field_behavior.proto";
-import "google/api/httpbody.proto";
 import "google/api/resource.proto";
 import "proto/knowledge/v1/file.proto";
 
-message CreateRequest {
-  string parent = 1 [
-    (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference) = {type: "knowledge.api.sdkim96.com/Workspace"}
-  ];
-
-  string file_name = 2 [(google.api.field_behavior) = REQUIRED];
-
-  string display_name = 3;
-  string description = 4;
-
-  optional int64 expected_size_bytes = 5;
-}
-
-message CreateResponse {
-  File file = 1;
-}
-
-message GetRequest {
+// GetFileRequest reads a single file.
+message GetFileRequest {
+  // name is the identifier of the file.
+  // For example, "workspaces/w1/files/f1"
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {type: "knowledge.api.sdkim96.com/File"}
   ];
 }
 
-message GetResponse {
-  File file = 1;
-}
-
-message UploadMetadata {
-  string name = 1 [
-    (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference) = {type: "knowledge.api.sdkim96.com/File"}
-  ];
-}
-
-message UploadRequest {
-  string name = 1 [
-    (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference) = {type: "knowledge.api.sdkim96.com/File"}
-  ];
-
-  google.api.HttpBody content = 2 [(google.api.field_behavior) = REQUIRED];
-}
-
-message UploadResponse {
-  File file = 1;
-}
-
+// FileService reads files in a workspace.
 service FileService {
-  rpc Create(CreateRequest) returns (CreateResponse) {
-    option (google.api.http) = {
-      post: "/v1/{parent=workspaces/*}/files"
-      body: "*"
-    };
-  }
-
-  rpc Get(GetRequest) returns (GetResponse) {
+  // GetFile returns a file, including its current state.
+  rpc GetFile(GetFileRequest) returns (File) {
     option (google.api.http) = {get: "/v1/{name=workspaces/*/files/*}"};
-  }
-
-  rpc Upload(UploadRequest) returns (UploadResponse) {
-    option (google.api.http) = {
-      post: "/v1/{name=workspaces/*/files/*}:upload"
-      body: "content"
-    };
   }
 }

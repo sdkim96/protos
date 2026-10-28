@@ -6,30 +6,47 @@ import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/protobuf/timestamp.proto";
 
-// FileUrl represents the metadata and the operation state for copying data source to the knowledge service.
-// The url should be accessible by sending HTTP/GET requests, with the mime_type and optional headers.
+// FileUrl represents the metadata and the operation state for copying a remote file to the knowledge service.
+// The server fetches the url with an HTTP GET request, using the optional headers.
+// Once FileUrl.state is FILE_URL_STATE_SUCCESS, its Source can be found by Source.ref == FileUrl.name.
 message FileUrl {
   option (google.api.resource) = {
     type: "knowledge.api.sdkim96.com/FileUrl"
     pattern: "workspaces/{workspace}/fileUrls/{file_url}"
+    singular: "fileUrl"
+    plural: "fileUrls"
   };
-  // name represents the identifier for this file. Represented like "workspaces/w1/fileUrls/fu1"
+  // name represents the identifier for this object, represented like "workspaces/w1/fileUrls/fu1"
   string name = 1 [(google.api.field_behavior) = IDENTIFIER];
   string display_name = 2 [(google.api.field_behavior) = REQUIRED];
   string description = 3 [(google.api.field_behavior) = OPTIONAL];
 
-  // url should be accessible by the system request.
+  // url is the remote location of the file. It must use https, and must resolve to a public address.
+  // Private, loopback and link-local addresses are rejected, including after redirects.
   string url = 4 [(google.api.field_behavior) = REQUIRED];
-  string mime_type = 5 [(google.api.field_behavior) = REQUIRED];
-  // the optional headers. It would be merged to the default headers.
-  map<string, string> headers = 6 [(google.api.field_behavior) = OPTIONAL];
+  // mime_type is the media type of the remote file.
+  // If empty, the server uses the Content-Type header of the fetched response.
+  string mime_type = 5 [(google.api.field_behavior) = OPTIONAL];
+  // headers are sent with the fetch request, merged into the default headers.
+  // They may carry credentials, so they are never returned in responses.
+  map<string, string> headers = 6 [(google.api.field_behavior) = INPUT_ONLY];
 
-  google.protobuf.Timestamp create_time = 200 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // size_bytes is computed by the server from the fetched content.
+  int64 size_bytes = 7 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // sha256_hash is computed by the server from the fetched content.
+  bytes sha256_hash = 8 [(google.api.field_behavior) = OUTPUT_ONLY];
+  FileUrlState state = 9 [(google.api.field_behavior) = OUTPUT_ONLY];
+
   string created_by = 100 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {type: "identity.api.sdkim96.com/Account"}
   ];
-  FileUrlState state = 9 [(google.api.field_behavior) = OUTPUT_ONLY];
+  string deleted_by = 102 [
+    (google.api.field_behavior) = OPTIONAL,
+    (google.api.resource_reference) = {type: "identity.api.sdkim96.com/Account"}
+  ];
+  google.protobuf.Timestamp create_time = 200 [(google.api.field_behavior) = OUTPUT_ONLY];
+  google.protobuf.Timestamp delete_time = 202 [(google.api.field_behavior) = OPTIONAL];
 }
 
 enum FileUrlState {

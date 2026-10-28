@@ -42,9 +42,11 @@ message File {
   string description = 4 [(google.api.field_behavior) = OPTIONAL];
 
   string mime_type = 5 [(google.api.field_behavior) = REQUIRED];
-  int64 size_bytes = 6;
+  // size_bytes is computed by the server from the received content.
+  int64 size_bytes = 6 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  bytes sha256_hash = 7 [(google.api.field_behavior) = OPTIONAL];
+  // sha256_hash is computed by the server from the received content.
+  bytes sha256_hash = 7 [(google.api.field_behavior) = OUTPUT_ONLY];
   FileState state = 8 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   string created_by = 100 [

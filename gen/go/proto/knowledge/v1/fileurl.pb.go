@@ -78,22 +78,33 @@ func (FileUrlState) EnumDescriptor() ([]byte, []int) {
 	return file_proto_knowledge_v1_fileurl_proto_rawDescGZIP(), []int{0}
 }
 
-// FileUrl represents the metadata and the operation state for copying data source to the knowledge service.
-// The url should be accessible by sending HTTP/GET requests, with the mime_type and optional headers.
+// FileUrl represents the metadata and the operation state for copying a remote file to the knowledge service.
+// The server fetches the url with an HTTP GET request, using the optional headers.
+// Once FileUrl.state is FILE_URL_STATE_SUCCESS, its Source can be found by Source.ref == FileUrl.name.
 type FileUrl struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// name represents the identifier for this file. Represented like "workspaces/w1/fileUrls/fu1"
+	// name represents the identifier for this object, represented like "workspaces/w1/fileUrls/fu1"
 	Name        string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	DisplayName string `protobuf:"bytes,2,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// url should be accessible by the system request.
-	Url      string `protobuf:"bytes,4,opt,name=url,proto3" json:"url,omitempty"`
+	// url is the remote location of the file. It must use https, and must resolve to a public address.
+	// Private, loopback and link-local addresses are rejected, including after redirects.
+	Url string `protobuf:"bytes,4,opt,name=url,proto3" json:"url,omitempty"`
+	// mime_type is the media type of the remote file.
+	// If empty, the server uses the Content-Type header of the fetched response.
 	MimeType string `protobuf:"bytes,5,opt,name=mime_type,json=mimeType,proto3" json:"mime_type,omitempty"`
-	// the optional headers. It would be merged to the default headers.
-	Headers       map[string]string      `protobuf:"bytes,6,rep,name=headers,proto3" json:"headers,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	CreateTime    *timestamppb.Timestamp `protobuf:"bytes,200,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
-	CreatedBy     string                 `protobuf:"bytes,100,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	// headers are sent with the fetch request, merged into the default headers.
+	// They may carry credentials, so they are never returned in responses.
+	Headers map[string]string `protobuf:"bytes,6,rep,name=headers,proto3" json:"headers,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// size_bytes is computed by the server from the fetched content.
+	SizeBytes int64 `protobuf:"varint,7,opt,name=size_bytes,json=sizeBytes,proto3" json:"size_bytes,omitempty"`
+	// sha256_hash is computed by the server from the fetched content.
+	Sha256Hash    []byte                 `protobuf:"bytes,8,opt,name=sha256_hash,json=sha256Hash,proto3" json:"sha256_hash,omitempty"`
 	State         FileUrlState           `protobuf:"varint,9,opt,name=state,proto3,enum=proto.knowledge.v1.FileUrlState" json:"state,omitempty"`
+	CreatedBy     string                 `protobuf:"bytes,100,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	DeletedBy     string                 `protobuf:"bytes,102,opt,name=deleted_by,json=deletedBy,proto3" json:"deleted_by,omitempty"`
+	CreateTime    *timestamppb.Timestamp `protobuf:"bytes,200,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	DeleteTime    *timestamppb.Timestamp `protobuf:"bytes,202,opt,name=delete_time,json=deleteTime,proto3" json:"delete_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -170,18 +181,18 @@ func (x *FileUrl) GetHeaders() map[string]string {
 	return nil
 }
 
-func (x *FileUrl) GetCreateTime() *timestamppb.Timestamp {
+func (x *FileUrl) GetSizeBytes() int64 {
 	if x != nil {
-		return x.CreateTime
+		return x.SizeBytes
 	}
-	return nil
+	return 0
 }
 
-func (x *FileUrl) GetCreatedBy() string {
+func (x *FileUrl) GetSha256Hash() []byte {
 	if x != nil {
-		return x.CreatedBy
+		return x.Sha256Hash
 	}
-	return ""
+	return nil
 }
 
 func (x *FileUrl) GetState() FileUrlState {
@@ -191,28 +202,65 @@ func (x *FileUrl) GetState() FileUrlState {
 	return FileUrlState_FILE_URL_STATE_UNSPECIFIED
 }
 
+func (x *FileUrl) GetCreatedBy() string {
+	if x != nil {
+		return x.CreatedBy
+	}
+	return ""
+}
+
+func (x *FileUrl) GetDeletedBy() string {
+	if x != nil {
+		return x.DeletedBy
+	}
+	return ""
+}
+
+func (x *FileUrl) GetCreateTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreateTime
+	}
+	return nil
+}
+
+func (x *FileUrl) GetDeleteTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DeleteTime
+	}
+	return nil
+}
+
 var File_proto_knowledge_v1_fileurl_proto protoreflect.FileDescriptor
 
 const file_proto_knowledge_v1_fileurl_proto_rawDesc = "" +
 	"\n" +
-	" proto/knowledge/v1/fileurl.proto\x12\x12proto.knowledge.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xcc\x04\n" +
+	" proto/knowledge/v1/fileurl.proto\x12\x12proto.knowledge.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb5\x06\n" +
 	"\aFileUrl\x12\x17\n" +
 	"\x04name\x18\x01 \x01(\tB\x03\xe0A\bR\x04name\x12&\n" +
 	"\fdisplay_name\x18\x02 \x01(\tB\x03\xe0A\x02R\vdisplayName\x12%\n" +
 	"\vdescription\x18\x03 \x01(\tB\x03\xe0A\x01R\vdescription\x12\x15\n" +
 	"\x03url\x18\x04 \x01(\tB\x03\xe0A\x02R\x03url\x12 \n" +
-	"\tmime_type\x18\x05 \x01(\tB\x03\xe0A\x02R\bmimeType\x12G\n" +
-	"\aheaders\x18\x06 \x03(\v2(.proto.knowledge.v1.FileUrl.HeadersEntryB\x03\xe0A\x01R\aheaders\x12A\n" +
-	"\vcreate_time\x18\xc8\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\n" +
-	"createTime\x12G\n" +
+	"\tmime_type\x18\x05 \x01(\tB\x03\xe0A\x01R\bmimeType\x12G\n" +
+	"\aheaders\x18\x06 \x03(\v2(.proto.knowledge.v1.FileUrl.HeadersEntryB\x03\xe0A\x04R\aheaders\x12\"\n" +
+	"\n" +
+	"size_bytes\x18\a \x01(\x03B\x03\xe0A\x03R\tsizeBytes\x12$\n" +
+	"\vsha256_hash\x18\b \x01(\fB\x03\xe0A\x03R\n" +
+	"sha256Hash\x12;\n" +
+	"\x05state\x18\t \x01(\x0e2 .proto.knowledge.v1.FileUrlStateB\x03\xe0A\x03R\x05state\x12G\n" +
 	"\n" +
 	"created_by\x18d \x01(\tB(\xe0A\x02\xfaA\"\n" +
-	" identity.api.sdkim96.com/AccountR\tcreatedBy\x12;\n" +
-	"\x05state\x18\t \x01(\x0e2 .proto.knowledge.v1.FileUrlStateB\x03\xe0A\x03R\x05state\x1a:\n" +
+	" identity.api.sdkim96.com/AccountR\tcreatedBy\x12G\n" +
+	"\n" +
+	"deleted_by\x18f \x01(\tB(\xe0A\x01\xfaA\"\n" +
+	" identity.api.sdkim96.com/AccountR\tdeletedBy\x12A\n" +
+	"\vcreate_time\x18\xc8\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\n" +
+	"createTime\x12A\n" +
+	"\vdelete_time\x18\xca\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x01R\n" +
+	"deleteTime\x1a:\n" +
 	"\fHeadersEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:R\xeaAO\n" +
-	"!knowledge.api.sdkim96.com/FileUrl\x12*workspaces/{workspace}/fileUrls/{file_url}*\xa1\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:e\xeaAb\n" +
+	"!knowledge.api.sdkim96.com/FileUrl\x12*workspaces/{workspace}/fileUrls/{file_url}*\bfileUrls2\afileUrl*\xa1\x01\n" +
 	"\fFileUrlState\x12\x1e\n" +
 	"\x1aFILE_URL_STATE_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18FILE_URL_STATE_SUBMITTED\x10\x01\x12\x1d\n" +
@@ -243,13 +291,14 @@ var file_proto_knowledge_v1_fileurl_proto_goTypes = []any{
 }
 var file_proto_knowledge_v1_fileurl_proto_depIdxs = []int32{
 	2, // 0: proto.knowledge.v1.FileUrl.headers:type_name -> proto.knowledge.v1.FileUrl.HeadersEntry
-	3, // 1: proto.knowledge.v1.FileUrl.create_time:type_name -> google.protobuf.Timestamp
-	0, // 2: proto.knowledge.v1.FileUrl.state:type_name -> proto.knowledge.v1.FileUrlState
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	0, // 1: proto.knowledge.v1.FileUrl.state:type_name -> proto.knowledge.v1.FileUrlState
+	3, // 2: proto.knowledge.v1.FileUrl.create_time:type_name -> google.protobuf.Timestamp
+	3, // 3: proto.knowledge.v1.FileUrl.delete_time:type_name -> google.protobuf.Timestamp
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_proto_knowledge_v1_fileurl_proto_init() }

@@ -27,7 +27,7 @@ from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1dproto/knowledge/v1/file.proto\x12\x12proto.knowledge.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x9f\x06\n\x04\x46ile\x12\x17\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x08R\x04name\x12 \n\tfile_name\x18\x02 \x01(\tB\x03\xe0\x41\x02R\x08\x66ileName\x12&\n\x0c\x64isplay_name\x18\x03 \x01(\tB\x03\xe0\x41\x01R\x0b\x64isplayName\x12%\n\x0b\x64\x65scription\x18\x04 \x01(\tB\x03\xe0\x41\x01R\x0b\x64\x65scription\x12 \n\tmime_type\x18\x05 \x01(\tB\x03\xe0\x41\x02R\x08mimeType\x12\x1d\n\nsize_bytes\x18\x06 \x01(\x03R\tsizeBytes\x12$\n\x0bsha256_hash\x18\x07 \x01(\x0c\x42\x03\xe0\x41\x01R\nsha256Hash\x12\x38\n\x05state\x18\x08 \x01(\x0e\x32\x1d.proto.knowledge.v1.FileStateB\x03\xe0\x41\x03R\x05state\x12G\n\ncreated_by\x18\x64 \x01(\tB(\xe0\x41\x02\xfa\x41\"\n identity.api.sdkim96.com/AccountR\tcreatedBy\x12G\n\nupdated_by\x18\x65 \x01(\tB(\xe0\x41\x01\xfa\x41\"\n identity.api.sdkim96.com/AccountR\tupdatedBy\x12G\n\ndeleted_by\x18\x66 \x01(\tB(\xe0\x41\x01\xfa\x41\"\n identity.api.sdkim96.com/AccountR\tdeletedBy\x12\x41\n\x0b\x63reate_time\x18\xc8\x01 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03R\ncreateTime\x12\x41\n\x0bupdate_time\x18\xc9\x01 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x01R\nupdateTime\x12\x41\n\x0b\x64\x65lete_time\x18\xca\x01 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x01R\ndeleteTime:H\xea\x41\x45\n\x1eknowledge.api.sdkim96.com/File\x12#workspaces/{workspace}/files/{file}*o\n\tFileState\x12\x1a\n\x16\x46ILE_STATE_UNSPECIFIED\x10\x00\x12\x18\n\x14\x46ILE_STATE_UPLOADING\x10\x01\x12\x16\n\x12\x46ILE_STATE_SUCCESS\x10\x02\x12\x14\n\x10\x46ILE_STATE_ERROR\x10\x03\x42\xce\x01\n\x16\x63om.proto.knowledge.v1B\tFileProtoP\x01Z?github.com/sdkim96/protos/gen/go/proto/knowledge/v1;knowledgev1\xa2\x02\x03PKX\xaa\x02\x12Proto.Knowledge.V1\xca\x02\x12Proto\\Knowledge\\V1\xe2\x02\x1eProto\\Knowledge\\V1\\GPBMetadata\xea\x02\x14Proto::Knowledge::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1dproto/knowledge/v1/file.proto\x12\x12proto.knowledge.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa4\x06\n\x04\x46ile\x12\x17\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x08R\x04name\x12 \n\tfile_name\x18\x02 \x01(\tB\x03\xe0\x41\x02R\x08\x66ileName\x12&\n\x0c\x64isplay_name\x18\x03 \x01(\tB\x03\xe0\x41\x01R\x0b\x64isplayName\x12%\n\x0b\x64\x65scription\x18\x04 \x01(\tB\x03\xe0\x41\x01R\x0b\x64\x65scription\x12 \n\tmime_type\x18\x05 \x01(\tB\x03\xe0\x41\x02R\x08mimeType\x12\"\n\nsize_bytes\x18\x06 \x01(\x03\x42\x03\xe0\x41\x03R\tsizeBytes\x12$\n\x0bsha256_hash\x18\x07 \x01(\x0c\x42\x03\xe0\x41\x03R\nsha256Hash\x12\x38\n\x05state\x18\x08 \x01(\x0e\x32\x1d.proto.knowledge.v1.FileStateB\x03\xe0\x41\x03R\x05state\x12G\n\ncreated_by\x18\x64 \x01(\tB(\xe0\x41\x02\xfa\x41\"\n identity.api.sdkim96.com/AccountR\tcreatedBy\x12G\n\nupdated_by\x18\x65 \x01(\tB(\xe0\x41\x01\xfa\x41\"\n identity.api.sdkim96.com/AccountR\tupdatedBy\x12G\n\ndeleted_by\x18\x66 \x01(\tB(\xe0\x41\x01\xfa\x41\"\n identity.api.sdkim96.com/AccountR\tdeletedBy\x12\x41\n\x0b\x63reate_time\x18\xc8\x01 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03R\ncreateTime\x12\x41\n\x0bupdate_time\x18\xc9\x01 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x01R\nupdateTime\x12\x41\n\x0b\x64\x65lete_time\x18\xca\x01 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x01R\ndeleteTime:H\xea\x41\x45\n\x1eknowledge.api.sdkim96.com/File\x12#workspaces/{workspace}/files/{file}*o\n\tFileState\x12\x1a\n\x16\x46ILE_STATE_UNSPECIFIED\x10\x00\x12\x18\n\x14\x46ILE_STATE_UPLOADING\x10\x01\x12\x16\n\x12\x46ILE_STATE_SUCCESS\x10\x02\x12\x14\n\x10\x46ILE_STATE_ERROR\x10\x03\x42\xce\x01\n\x16\x63om.proto.knowledge.v1B\tFileProtoP\x01Z?github.com/sdkim96/protos/gen/go/proto/knowledge/v1;knowledgev1\xa2\x02\x03PKX\xaa\x02\x12Proto.Knowledge.V1\xca\x02\x12Proto\\Knowledge\\V1\xe2\x02\x1eProto\\Knowledge\\V1\\GPBMetadata\xea\x02\x14Proto::Knowledge::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -45,8 +45,10 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_FILE'].fields_by_name['description']._serialized_options = b'\340A\001'
   _globals['_FILE'].fields_by_name['mime_type']._loaded_options = None
   _globals['_FILE'].fields_by_name['mime_type']._serialized_options = b'\340A\002'
+  _globals['_FILE'].fields_by_name['size_bytes']._loaded_options = None
+  _globals['_FILE'].fields_by_name['size_bytes']._serialized_options = b'\340A\003'
   _globals['_FILE'].fields_by_name['sha256_hash']._loaded_options = None
-  _globals['_FILE'].fields_by_name['sha256_hash']._serialized_options = b'\340A\001'
+  _globals['_FILE'].fields_by_name['sha256_hash']._serialized_options = b'\340A\003'
   _globals['_FILE'].fields_by_name['state']._loaded_options = None
   _globals['_FILE'].fields_by_name['state']._serialized_options = b'\340A\003'
   _globals['_FILE'].fields_by_name['created_by']._loaded_options = None
@@ -63,8 +65,8 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_FILE'].fields_by_name['delete_time']._serialized_options = b'\340A\001'
   _globals['_FILE']._loaded_options = None
   _globals['_FILE']._serialized_options = b'\352AE\n\036knowledge.api.sdkim96.com/File\022#workspaces/{workspace}/files/{file}'
-  _globals['_FILESTATE']._serialized_start=948
-  _globals['_FILESTATE']._serialized_end=1059
+  _globals['_FILESTATE']._serialized_start=953
+  _globals['_FILESTATE']._serialized_end=1064
   _globals['_FILE']._serialized_start=147
-  _globals['_FILE']._serialized_end=946
+  _globals['_FILE']._serialized_end=951
 # @@protoc_insertion_point(module_scope)

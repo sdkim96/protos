@@ -3,6 +3,10 @@ version: v2
 lint:
   use:
     - STANDARD
+  except:
+    # RPCs may return the resource itself (e.g. File) instead of a wrapper response.
+    - RPC_RESPONSE_STANDARD_NAME
+    - RPC_REQUEST_RESPONSE_UNIQUE
 deps:
   - buf.build/googleapis/googleapis
 breaking:

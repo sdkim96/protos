@@ -105,12 +105,14 @@ func (FileState) EnumDescriptor() ([]byte, []int) {
 type File struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// name represents the identifier for this object, represented like "workspaces/w1/files/f1"
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	FileName      string                 `protobuf:"bytes,2,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
-	DisplayName   string                 `protobuf:"bytes,3,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
-	Description   string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	MimeType      string                 `protobuf:"bytes,5,opt,name=mime_type,json=mimeType,proto3" json:"mime_type,omitempty"`
-	SizeBytes     int64                  `protobuf:"varint,6,opt,name=size_bytes,json=sizeBytes,proto3" json:"size_bytes,omitempty"`
+	Name        string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	FileName    string `protobuf:"bytes,2,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
+	DisplayName string `protobuf:"bytes,3,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	MimeType    string `protobuf:"bytes,5,opt,name=mime_type,json=mimeType,proto3" json:"mime_type,omitempty"`
+	// size_bytes is computed by the server from the received content.
+	SizeBytes int64 `protobuf:"varint,6,opt,name=size_bytes,json=sizeBytes,proto3" json:"size_bytes,omitempty"`
+	// sha256_hash is computed by the server from the received content.
 	Sha256Hash    []byte                 `protobuf:"bytes,7,opt,name=sha256_hash,json=sha256Hash,proto3" json:"sha256_hash,omitempty"`
 	State         FileState              `protobuf:"varint,8,opt,name=state,proto3,enum=proto.knowledge.v1.FileState" json:"state,omitempty"`
 	CreatedBy     string                 `protobuf:"bytes,100,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
@@ -255,16 +257,16 @@ var File_proto_knowledge_v1_file_proto protoreflect.FileDescriptor
 
 const file_proto_knowledge_v1_file_proto_rawDesc = "" +
 	"\n" +
-	"\x1dproto/knowledge/v1/file.proto\x12\x12proto.knowledge.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x9f\x06\n" +
+	"\x1dproto/knowledge/v1/file.proto\x12\x12proto.knowledge.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa4\x06\n" +
 	"\x04File\x12\x17\n" +
 	"\x04name\x18\x01 \x01(\tB\x03\xe0A\bR\x04name\x12 \n" +
 	"\tfile_name\x18\x02 \x01(\tB\x03\xe0A\x02R\bfileName\x12&\n" +
 	"\fdisplay_name\x18\x03 \x01(\tB\x03\xe0A\x01R\vdisplayName\x12%\n" +
 	"\vdescription\x18\x04 \x01(\tB\x03\xe0A\x01R\vdescription\x12 \n" +
-	"\tmime_type\x18\x05 \x01(\tB\x03\xe0A\x02R\bmimeType\x12\x1d\n" +
+	"\tmime_type\x18\x05 \x01(\tB\x03\xe0A\x02R\bmimeType\x12\"\n" +
 	"\n" +
-	"size_bytes\x18\x06 \x01(\x03R\tsizeBytes\x12$\n" +
-	"\vsha256_hash\x18\a \x01(\fB\x03\xe0A\x01R\n" +
+	"size_bytes\x18\x06 \x01(\x03B\x03\xe0A\x03R\tsizeBytes\x12$\n" +
+	"\vsha256_hash\x18\a \x01(\fB\x03\xe0A\x03R\n" +
 	"sha256Hash\x128\n" +
 	"\x05state\x18\b \x01(\x0e2\x1d.proto.knowledge.v1.FileStateB\x03\xe0A\x03R\x05state\x12G\n" +
 	"\n" +

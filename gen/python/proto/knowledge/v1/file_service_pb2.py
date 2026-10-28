@@ -24,12 +24,11 @@ _sym_db = _symbol_database.Default()
 
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
-from google.api import httpbody_pb2 as google_dot_api_dot_httpbody__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from proto.knowledge.v1 import file_pb2 as proto_dot_knowledge_dot_v1_dot_file__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n%proto/knowledge/v1/file_service.proto\x12\x12proto.knowledge.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/httpbody.proto\x1a\x19google/api/resource.proto\x1a\x1dproto/knowledge/v1/file.proto\"\x88\x02\n\rCreateRequest\x12\x43\n\x06parent\x18\x01 \x01(\tB+\xe0\x41\x02\xfa\x41%\n#knowledge.api.sdkim96.com/WorkspaceR\x06parent\x12 \n\tfile_name\x18\x02 \x01(\tB\x03\xe0\x41\x02R\x08\x66ileName\x12!\n\x0c\x64isplay_name\x18\x03 \x01(\tR\x0b\x64isplayName\x12 \n\x0b\x64\x65scription\x18\x04 \x01(\tR\x0b\x64\x65scription\x12\x33\n\x13\x65xpected_size_bytes\x18\x05 \x01(\x03H\x00R\x11\x65xpectedSizeBytes\x88\x01\x01\x42\x16\n\x14_expected_size_bytes\">\n\x0e\x43reateResponse\x12,\n\x04\x66ile\x18\x01 \x01(\x0b\x32\x18.proto.knowledge.v1.FileR\x04\x66ile\"H\n\nGetRequest\x12:\n\x04name\x18\x01 \x01(\tB&\xe0\x41\x02\xfa\x41 \n\x1eknowledge.api.sdkim96.com/FileR\x04name\";\n\x0bGetResponse\x12,\n\x04\x66ile\x18\x01 \x01(\x0b\x32\x18.proto.knowledge.v1.FileR\x04\x66ile\"L\n\x0eUploadMetadata\x12:\n\x04name\x18\x01 \x01(\tB&\xe0\x41\x02\xfa\x41 \n\x1eknowledge.api.sdkim96.com/FileR\x04name\"\x80\x01\n\rUploadRequest\x12:\n\x04name\x18\x01 \x01(\tB&\xe0\x41\x02\xfa\x41 \n\x1eknowledge.api.sdkim96.com/FileR\x04name\x12\x33\n\x07\x63ontent\x18\x02 \x01(\x0b\x32\x14.google.api.HttpBodyB\x03\xe0\x41\x02R\x07\x63ontent\">\n\x0eUploadResponse\x12,\n\x04\x66ile\x18\x01 \x01(\x0b\x32\x18.proto.knowledge.v1.FileR\x04\x66ile2\x86\x03\n\x0b\x46ileService\x12{\n\x06\x43reate\x12!.proto.knowledge.v1.CreateRequest\x1a\".proto.knowledge.v1.CreateResponse\"*\x82\xd3\xe4\x93\x02$\"\x1f/v1/{parent=workspaces/*}/files:\x01*\x12o\n\x03Get\x12\x1e.proto.knowledge.v1.GetRequest\x1a\x1f.proto.knowledge.v1.GetResponse\"\'\x82\xd3\xe4\x93\x02!\x12\x1f/v1/{name=workspaces/*/files/*}\x12\x88\x01\n\x06Upload\x12!.proto.knowledge.v1.UploadRequest\x1a\".proto.knowledge.v1.UploadResponse\"7\x82\xd3\xe4\x93\x02\x31\"&/v1/{name=workspaces/*/files/*}:upload:\x07\x63ontentB\xd5\x01\n\x16\x63om.proto.knowledge.v1B\x10\x46ileServiceProtoP\x01Z?github.com/sdkim96/protos/gen/go/proto/knowledge/v1;knowledgev1\xa2\x02\x03PKX\xaa\x02\x12Proto.Knowledge.V1\xca\x02\x12Proto\\Knowledge\\V1\xe2\x02\x1eProto\\Knowledge\\V1\\GPBMetadata\xea\x02\x14Proto::Knowledge::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n%proto/knowledge/v1/file_service.proto\x12\x12proto.knowledge.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1dproto/knowledge/v1/file.proto\"L\n\x0eGetFileRequest\x12:\n\x04name\x18\x01 \x01(\tB&\xe0\x41\x02\xfa\x41 \n\x1eknowledge.api.sdkim96.com/FileR\x04name2\x7f\n\x0b\x46ileService\x12p\n\x07GetFile\x12\".proto.knowledge.v1.GetFileRequest\x1a\x18.proto.knowledge.v1.File\"\'\x82\xd3\xe4\x93\x02!\x12\x1f/v1/{name=workspaces/*/files/*}B\xd5\x01\n\x16\x63om.proto.knowledge.v1B\x10\x46ileServiceProtoP\x01Z?github.com/sdkim96/protos/gen/go/proto/knowledge/v1;knowledgev1\xa2\x02\x03PKX\xaa\x02\x12Proto.Knowledge.V1\xca\x02\x12Proto\\Knowledge\\V1\xe2\x02\x1eProto\\Knowledge\\V1\\GPBMetadata\xea\x02\x14Proto::Knowledge::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -37,38 +36,12 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'proto.knowledge.v1.file_ser
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'\n\026com.proto.knowledge.v1B\020FileServiceProtoP\001Z?github.com/sdkim96/protos/gen/go/proto/knowledge/v1;knowledgev1\242\002\003PKX\252\002\022Proto.Knowledge.V1\312\002\022Proto\\Knowledge\\V1\342\002\036Proto\\Knowledge\\V1\\GPBMetadata\352\002\024Proto::Knowledge::V1'
-  _globals['_CREATEREQUEST'].fields_by_name['parent']._loaded_options = None
-  _globals['_CREATEREQUEST'].fields_by_name['parent']._serialized_options = b'\340A\002\372A%\n#knowledge.api.sdkim96.com/Workspace'
-  _globals['_CREATEREQUEST'].fields_by_name['file_name']._loaded_options = None
-  _globals['_CREATEREQUEST'].fields_by_name['file_name']._serialized_options = b'\340A\002'
-  _globals['_GETREQUEST'].fields_by_name['name']._loaded_options = None
-  _globals['_GETREQUEST'].fields_by_name['name']._serialized_options = b'\340A\002\372A \n\036knowledge.api.sdkim96.com/File'
-  _globals['_UPLOADMETADATA'].fields_by_name['name']._loaded_options = None
-  _globals['_UPLOADMETADATA'].fields_by_name['name']._serialized_options = b'\340A\002\372A \n\036knowledge.api.sdkim96.com/File'
-  _globals['_UPLOADREQUEST'].fields_by_name['name']._loaded_options = None
-  _globals['_UPLOADREQUEST'].fields_by_name['name']._serialized_options = b'\340A\002\372A \n\036knowledge.api.sdkim96.com/File'
-  _globals['_UPLOADREQUEST'].fields_by_name['content']._loaded_options = None
-  _globals['_UPLOADREQUEST'].fields_by_name['content']._serialized_options = b'\340A\002'
-  _globals['_FILESERVICE'].methods_by_name['Create']._loaded_options = None
-  _globals['_FILESERVICE'].methods_by_name['Create']._serialized_options = b'\202\323\344\223\002$\"\037/v1/{parent=workspaces/*}/files:\001*'
-  _globals['_FILESERVICE'].methods_by_name['Get']._loaded_options = None
-  _globals['_FILESERVICE'].methods_by_name['Get']._serialized_options = b'\202\323\344\223\002!\022\037/v1/{name=workspaces/*/files/*}'
-  _globals['_FILESERVICE'].methods_by_name['Upload']._loaded_options = None
-  _globals['_FILESERVICE'].methods_by_name['Upload']._serialized_options = b'\202\323\344\223\0021\"&/v1/{name=workspaces/*/files/*}:upload:\007content'
-  _globals['_CREATEREQUEST']._serialized_start=210
-  _globals['_CREATEREQUEST']._serialized_end=474
-  _globals['_CREATERESPONSE']._serialized_start=476
-  _globals['_CREATERESPONSE']._serialized_end=538
-  _globals['_GETREQUEST']._serialized_start=540
-  _globals['_GETREQUEST']._serialized_end=612
-  _globals['_GETRESPONSE']._serialized_start=614
-  _globals['_GETRESPONSE']._serialized_end=673
-  _globals['_UPLOADMETADATA']._serialized_start=675
-  _globals['_UPLOADMETADATA']._serialized_end=751
-  _globals['_UPLOADREQUEST']._serialized_start=754
-  _globals['_UPLOADREQUEST']._serialized_end=882
-  _globals['_UPLOADRESPONSE']._serialized_start=884
-  _globals['_UPLOADRESPONSE']._serialized_end=946
-  _globals['_FILESERVICE']._serialized_start=949
-  _globals['_FILESERVICE']._serialized_end=1339
+  _globals['_GETFILEREQUEST'].fields_by_name['name']._loaded_options = None
+  _globals['_GETFILEREQUEST'].fields_by_name['name']._serialized_options = b'\340A\002\372A \n\036knowledge.api.sdkim96.com/File'
+  _globals['_FILESERVICE'].methods_by_name['GetFile']._loaded_options = None
+  _globals['_FILESERVICE'].methods_by_name['GetFile']._serialized_options = b'\202\323\344\223\002!\022\037/v1/{name=workspaces/*/files/*}'
+  _globals['_GETFILEREQUEST']._serialized_start=182
+  _globals['_GETFILEREQUEST']._serialized_end=258
+  _globals['_FILESERVICE']._serialized_start=260
+  _globals['_FILESERVICE']._serialized_end=387
 # @@protoc_insertion_point(module_scope)

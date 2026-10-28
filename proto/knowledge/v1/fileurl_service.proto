@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package proto.knowledge.v1;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "proto/knowledge/v1/fileurl.proto";
+
+// CreateFileUrlRequest submits a remote file to be copied into the workspace.
+message CreateFileUrlRequest {
+  // parent is the workspace that owns the file url.
+  // For example, "workspaces/w1"
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "knowledge.api.sdkim96.com/Workspace"}
+  ];
+  // file_url is the resource to create. It is the whole JSON body of the HTTP request.
+  FileUrl file_url = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// GetFileUrlRequest reads a single file url.
+message GetFileUrlRequest {
+  // name is the identifier of the file url.
+  // For example, "workspaces/w1/fileUrls/fu1"
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "knowledge.api.sdkim96.com/FileUrl"}
+  ];
+}
+
+// FileUrlService copies remote files into the knowledge service.
+service FileUrlService {
+  // CreateFileUrl registers a remote file and starts fetching it.
+  // The returned FileUrl is in FILE_URL_STATE_SUBMITTED. Clients poll GetFileUrl until
+  // FileUrl.state is FILE_URL_STATE_SUCCESS, then find its Source by Source.ref == FileUrl.name.
+  //
+  // Errors:
+  //  - 400 Bad Request: a required field is missing, or url is not https.
+  //  - 403 Forbidden: url resolves to a private, loopback or link-local address.
+  rpc CreateFileUrl(CreateFileUrlRequest) returns (FileUrl) {
+    option (google.api.http) = {
+      post: "/v1/{parent=workspaces/*}/fileUrls"
+      body: "file_url"
+    };
+  }
+
+  // GetFileUrl returns a file url, including its current state.
+  rpc GetFileUrl(GetFileUrlRequest) returns (FileUrl) {
+    option (google.api.http) = {get: "/v1/{name=workspaces/*/fileUrls/*}"};
+  }
+}
